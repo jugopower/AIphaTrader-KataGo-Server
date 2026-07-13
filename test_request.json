@@ -1,0 +1,21 @@
+{
+  "boardSize": 19,
+  "moves": [
+    [
+      "B",
+      "Q16"
+    ],
+    [
+      "W",
+      "D4"
+    ]
+  ],
+  "initialStones": [],
+  "komi": 6.5,
+  "rules": "japanese",
+  "maxVisits": 500,
+  "includePolicy": true,
+  "includeOwnership": true,
+  "moveNumber": 2,
+  "appVersion": "Build017.3"
+}

@@ -1,0 +1,16 @@
+services:
+  katago-api:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      MOCK_MODE: "true"
+      ALLOWED_ORIGINS: "https://jugopower.github.io,http://localhost:8080"
+      API_KEY: ""
+      KATAGO_BINARY: "/app/bin/katago"
+      KATAGO_MODEL: "/app/models/model.bin.gz"
+      KATAGO_CONFIG: "/app/config/analysis.cfg"
+    volumes:
+      - ./bin:/app/bin:ro
+      - ./models:/app/models:ro
+      - ./config:/app/config:ro
