@@ -1,5 +1,7 @@
 from fastapi import FastAPI
+import os
 
+import subprocess
 from fastapi.middleware.cors import CORSMiddleware
 
 from app.schemas import AnalyzeRequest, AnalyzeResponse, CandidateMove
@@ -48,15 +50,33 @@ def root():
 
 def health():
 
+    katago_bin = os.getenv("KATAGO_BIN", "/opt/katago/katago")
+
+    katago_model = os.getenv("KATAGO_MODEL", "/opt/katago/model.bin.gz")
+
+    katago_config = os.getenv("KATAGO_CONFIG", "/app/config/analysis.cfg")
+
+    katago_ready = (
+
+        os.path.isfile(katago_bin)
+
+        and os.access(katago_bin, os.X_OK)
+
+        and os.path.isfile(katago_model)
+
+        and os.path.isfile(katago_config)
+
+    )
+
     return {
 
         "status": "healthy",
 
-        "katago_ready": False,
+        "katago_ready": katago_ready,
 
-        "mode": "demo",
+        "mode": "katago" if katago_ready else "demo",
 
-        "build": "Build017.3A",
+        "build": "Build018.3",
 
     }
 
